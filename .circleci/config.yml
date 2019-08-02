@@ -32,7 +32,7 @@ jobs:
           command: |
             export MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
             mv make/osx.mk config.mk
-            echo "mv success"
+            echo $CURDIR
             make -j 2
       - save_cache:
           key: cache
