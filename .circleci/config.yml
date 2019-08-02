@@ -22,7 +22,7 @@ jobs:
           name: Before Install
           command: 
             export PYTHONPATH=${PYTHONPATH}:${PWD}/python
-            git clone --recursive https://github.com/dmlc/xgboost
+            git clone --recursive https://github.com/dmlc/xgboost.git
       - run: 
           name: Install
           command: | 
