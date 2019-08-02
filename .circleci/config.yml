@@ -18,13 +18,21 @@ jobs:
       - restore_cache:
           keys:
             - cache
-      - run: export PYTHONPATH=${PYTHONPATH}:${PWD}/python
-      - run: HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache
-      - run: export PATH="/usr/local/opt/ccache/libexec:$PATH"
-      - run: source ci/travis/install.sh
-      - run: export MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
-      - run: mv make/osx.mk config.mk
-      - run: make -j 2
+      - run:
+          name: Before Install
+          command: export PYTHONPATH=${PYTHONPATH}:${PWD}/python
+      - run: 
+          name: Install
+          command: | 
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache
+            export PATH="/usr/local/opt/ccache/libexec:$PATH"
+            source ci/travis/install.sh
+      - run: 
+          name: Script
+          command: |
+            export MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
+            mv make/osx.mk config.mk
+            make -j 2
       - save_cache:
           key: cache
           paths:
