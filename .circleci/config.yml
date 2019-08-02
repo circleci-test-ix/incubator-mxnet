@@ -27,12 +27,12 @@ jobs:
       - run: mv make/osx.mk config.mk
       - run: make -j 2
       - save_cache:
-        key: cache
-        paths:
-          - $HOME/.cache/pip
-          - $HOME/.mxnet
-          - $HOME/Library/Caches/Homebrew
+          key: cache
+          paths:
+            - $HOME/.cache/pip
+            - $HOME/.mxnet
+            - $HOME/Library/Caches/Homebrew
       - save_cache:
-        key: ccache
-        paths:
-          - $HOME/.ccache
+          key: ccache
+          paths:
+            - $HOME/.ccache
