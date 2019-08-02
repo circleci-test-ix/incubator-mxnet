@@ -20,7 +20,9 @@ jobs:
             - cache
       - run:
           name: Before Install
-          command: export PYTHONPATH=${PYTHONPATH}:${PWD}/python
+          command: 
+            export PYTHONPATH=${PYTHONPATH}:${PWD}/python
+            git clone --recursive https://github.com/dmlc/xgboost
       - run: 
           name: Install
           command: | 
