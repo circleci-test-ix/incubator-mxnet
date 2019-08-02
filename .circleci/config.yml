@@ -1,5 +1,11 @@
 version: 2.1
 
+workflows:
+  version: 2
+  build:
+    jobs:
+      - run
+
 jobs:
   run:
     macos:
