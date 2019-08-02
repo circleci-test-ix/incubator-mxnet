@@ -31,7 +31,9 @@ jobs:
           name: Script
           command: |
             export MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
+            ehco "Export complete"
             mv make/osx.mk config.mk
+            echo "mv success"
             make -j 2
       - save_cache:
           key: cache
