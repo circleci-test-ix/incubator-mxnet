@@ -20,12 +20,9 @@ jobs:
             - cache
       - run:
           name: Before Install
-          command: 
+          command: |
             export PYTHONPATH=${PYTHONPATH}:${PWD}/python
-      - run:
-          name: Temp
-          command:
-            git clone --recursive https://github.com/dmlc/xgboost.git
+            git clone --recursive https://github.com/dmlc/xgboost
       - run: 
           name: Install
           command: | 
