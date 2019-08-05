@@ -10,9 +10,8 @@ jobs:
   run:
     macos:
       xcode: "9.4.1"
-    environment: 
-      HOMEBREW_DEVELOPER=1
-      HOMEBREW_NO_AUTO_UPDATE=1
+    environment:
+      TRAVIS_OS_NAME: osx
     steps:
       - checkout
 #       - restore_cache:
@@ -21,15 +20,21 @@ jobs:
       - run:
           name: Before Install
           command: |
-            export TRAVIS_OS_NAME=osx
-            export PYTHONPATH=${PYTHONPATH}:${PWD}/python
+            echo "****** 1"
+            #export PYTHONPATH=${PYTHONPATH}:${PWD}/python
             #git clone --recursive https://github.com/dmlc/xgboost
             HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache
+            echo "****** 2"
             export PATH="/usr/local/opt/ccache/libexec:$PATH"
+            echo "****** 3"
             source ci/travis/install.sh
+            echo "****** 4"
             export MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
+            echo "****** 5"
             mv make/osx.mk config.mk            
+            echo "****** 6"
             make -j 2
+            echo "****** 7"
 #       - run: 
 #           name: Install
 #           command: | 
@@ -46,7 +51,8 @@ jobs:
       - save_cache:
           key: cache
           paths:
-            - $HOME/.cache/pip
-            - $HOME/.mxnet
-            - $HOME/Library/Caches/Homebrew
-            - $HOME/.ccache
+            - /Users/distiller/.ccache
+            - /Users/distiller/.cache/pip
+            - /Users/distiller/.mxnet
+            - /Users/distiller/Library/Caches/Homebrew
+            
