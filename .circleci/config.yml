@@ -14,41 +14,22 @@ jobs:
       TRAVIS_OS_NAME: osx
     steps:
       - checkout
+      - run:
+          name: Checkout Submodules
+          command: git submodule update --init --recursive
       - restore_cache:
           keys:
             - cache
       - run:
-          name: Before Install
+          name: Build Script
           command: |
-            echo "****** 1"
-            git submodule update --init --recursive
-            #export PYTHONPATH=${PYTHONPATH}:${PWD}/python
-            #git clone --recursive https://github.com/dmlc/xgboost
-            HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache pkg-config
-            echo "****** 2"
+            export PYTHONPATH=${PYTHONPATH}:${PWD}/python
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache pkg-config            
             export PATH="/usr/local/opt/ccache/libexec:$PATH"
-            echo "****** 3"
             source ci/travis/install.sh
-            echo "****** 4"
             export MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
-            echo "****** 5"
-            mv make/osx.mk config.mk            
-            echo "****** 6"
+            mv make/osx.mk config.mk
             make -j 2
-            echo "****** 7"
-#       - run: 
-#           name: Install
-#           command: | 
-#             HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache
-#             export PATH="/usr/local/opt/ccache/libexec:$PATH"
-#             source ci/travis/install.sh
-#       - run: 
-#           name: Script
-#           command: |
-#             export MXNET_STORAGE_FALLBACK_LOG_VERBOSE=0
-#             mv make/osx.mk config.mk
-#             echo $CURDIR
-#             make -j 2
       - save_cache:
           key: cache
           paths:
