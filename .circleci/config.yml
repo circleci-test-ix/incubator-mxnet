@@ -21,6 +21,7 @@ jobs:
       - run:
           name: Before Install
           command: |
+            export TRAVIS_OS_NAME=osx
             export PYTHONPATH=${PYTHONPATH}:${PWD}/python
             #git clone --recursive https://github.com/dmlc/xgboost
             HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache
