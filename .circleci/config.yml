@@ -21,6 +21,7 @@ jobs:
           name: Before Install
           command: |
             echo "****** 1"
+            git submodule update --init --recursive
             #export PYTHONPATH=${PYTHONPATH}:${PWD}/python
             #git clone --recursive https://github.com/dmlc/xgboost
             HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache
