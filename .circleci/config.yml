@@ -14,9 +14,9 @@ jobs:
       TRAVIS_OS_NAME: osx
     steps:
       - checkout
-#       - restore_cache:
-#           keys:
-#             - cache
+      - restore_cache:
+          keys:
+            - cache
       - run:
           name: Before Install
           command: |
@@ -24,7 +24,7 @@ jobs:
             git submodule update --init --recursive
             #export PYTHONPATH=${PYTHONPATH}:${PWD}/python
             #git clone --recursive https://github.com/dmlc/xgboost
-            HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache
+            HOMEBREW_NO_AUTO_UPDATE=1 brew install ccache pkg-config
             echo "****** 2"
             export PATH="/usr/local/opt/ccache/libexec:$PATH"
             echo "****** 3"
